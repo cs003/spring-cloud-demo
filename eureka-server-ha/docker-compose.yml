@@ -1,0 +1,30 @@
+version: "2"
+services:
+  peer1:      # 默认情况下，其他服务可使用服务名称连接到该服务。对于peer2节点，它需连接http://peer1:8761/eureka/，因此，我们可配置该服务的名称为peer1。
+    image: jiaozg/eureka-server-ha:0.0.1-SNAPSHOT
+    ports:
+      - "8000:8000"
+    environment:
+      - spring.profiles.active=peer1
+  peer2:
+    image: jiaozg/eureka-server-ha:0.0.1-SNAPSHOT
+    hostname: peer2
+    ports:
+      - "8001:8001"
+    environment:
+      - spring.profiles.active=peer2
+  eureka-client:
+    image: jiaozg/eureka-client:0.0.1-SNAPSHOT
+#    ports:
+#      - "2011:2011"
+  eureka-consumer-ribbon-hystrix:
+    image: jiaozg/eureka-consumer-ribbon-hystrix:0.0.1-SNAPSHOT
+    ports:
+      - "2101:2101"
+  hystrix-dashboard:
+    image: jiaozg/hystrix-dashboard:0.0.1-SNAPSHOT
+  turbine:
+    image: jiaozg/turbine:0.0.1-SNAPSHOT
+
+
+## 使用Compose编排高可用的Eureka Server。

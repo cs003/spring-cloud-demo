@@ -1,6 +1,12 @@
 spring:
   application:
     name: config-client
+  rabbitmq:
+    host: localhost
+    port: 5672
+    virtual-host: bawei
+    username: bawei
+    password: bawei
   cloud:
     config:
       #uri: http://localhost:1201/
@@ -10,9 +16,18 @@ spring:
       discovery:
         enabled: true
         serviceId: config-server
+    bus:
+      trace:
+        enabled: true # 开启消息跟踪
 #server:
 #  port: 2001
+# 注册中心eurka地址
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://user:password@localhost:2002/eureka/   # 注册中心eurka地址
+      defaultZone: http://user:password@localhost:2002/eureka/
+# 刷新时，关闭安全验证
+management:
+  security:
+    enabled: false
+

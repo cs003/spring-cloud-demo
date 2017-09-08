@@ -1,0 +1,12 @@
+version: '2'
+services:
+  eureka-server:
+    image: jiaozg/eureka-server:0.0.1
+    ports:
+      - "2002:2002"
+  eureka-client:
+    image: jiaozg/eureka-client:0.0.1
+    links:          # 链接到microservice-discovery-eureka，这边使用的是SERVICE:ALIAS的形式
+          - eureka-server:discovery
+
+# 最简单的配置方式，等价于docker-compose.yml。

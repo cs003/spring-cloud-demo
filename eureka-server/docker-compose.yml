@@ -1,0 +1,6 @@
+eureka:
+  build: ./target
+  ports:
+    - "2002:2002"
+  expose:
+    - 2002
